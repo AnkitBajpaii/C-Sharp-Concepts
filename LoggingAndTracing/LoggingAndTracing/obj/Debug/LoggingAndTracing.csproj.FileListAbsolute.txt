@@ -1,0 +1,6 @@
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\bin\Debug\LoggingAndTracing.exe
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\bin\Debug\LoggingAndTracing.pdb
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\obj\Debug\LoggingAndTracing.csprojResolveAssemblyReference.cache
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\obj\Debug\LoggingAndTracing.exe
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\obj\Debug\LoggingAndTracing.pdb
+D:\GitWorkSpace\FormsAuthenticationUsingAsp.NET\LoggingAndTracing\LoggingAndTracing\bin\Debug\LoggingAndTracing.exe.config
