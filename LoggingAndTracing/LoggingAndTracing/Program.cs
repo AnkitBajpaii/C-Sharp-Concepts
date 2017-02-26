@@ -72,28 +72,35 @@ namespace LoggingAndTracing
             //Debug.WriteLine("The available units on hand are" + iUnitQty.ToString());
             //Debug.WriteLine("The per unit cost is " + dUnitCost.ToString());
 
-            Debug.WriteLine("The product name is " + sProdName, "Field");
-            Debug.WriteLine("The units on hand are " + iUnitQty, "Field");
-            Debug.WriteLine("The per unit cost is " + dUnitCost.ToString(), "Field");
-            Debug.WriteLine("Total Cost is  " + (iUnitQty * dUnitCost), "Calc");
+            Debug.WriteLine("The product name is " + sProdName, "Debug");
+            Debug.WriteLine("The units on hand are " + iUnitQty, "Debug");
+            Debug.WriteLine("The per unit cost is " + dUnitCost.ToString(), "Debug");
+            Debug.WriteLine("Total Cost is  " + (iUnitQty * dUnitCost), "Debug");
 
-            Debug.WriteLineIf(iUnitQty > 50, "Units of hand greater than 50.","Conditional");
+            Debug.WriteLineIf(iUnitQty > 50, "Units of hand greater than 50.", "Debug");
 
             Debug.Assert(dUnitCost > 1, "The per unit cost is very small");
 
             TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
             Debug.Listeners.Add(tr1);
-
+            
             TextWriterTraceListener tr2 = new TextWriterTraceListener(System.IO.File.CreateText("Output.txt"));
+            //Both the Trace and Debug classes share the same TraceListenerCollection object; therefore, if you add a listener to Trace object, it will also be available to Debug object, and vice versa.
             Debug.Listeners.Add(tr2);
 
+            //optional as we added listner in Debug above
+            //Trace.Listeners.Add(tr2);
+
+            Trace.WriteLine("The product name is " + sProdName, "Trace");
+            Trace.WriteLine("The units on hand are " + iUnitQty, "Trace");
+            //Debug.WriteLine("The per unit cost is " + dUnitCost.ToString(), "Debug");
         }
 
         static void Main(string[] args)
         {
-            CustomLoggingDemo();
+            //CustomLoggingDemo();
 
-            //TracingDemo();
+            TracingDemo();
 
             Console.ReadKey();
         }

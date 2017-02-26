@@ -93,6 +93,10 @@ namespace ReflectionDemo1
                     if (ctr != null)
                     {
                         object instance = ctr.Invoke(new object[] { "Ankit", 27 });
+
+                        //else you cn also create instance by
+                        //object instance = Activator.CreateInstance(pTyp);
+
                         if (instance != null)
                         {
                             MethodInfo method = pTyp.GetMethod("DisplayPersonDetails");
