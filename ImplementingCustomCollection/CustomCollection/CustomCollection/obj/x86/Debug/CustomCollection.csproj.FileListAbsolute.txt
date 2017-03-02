@@ -1,0 +1,4 @@
+c:\users\abajpai\documents\visual studio 2010\Projects\CustomCollection\CustomCollection\bin\Debug\CustomCollection.exe
+c:\users\abajpai\documents\visual studio 2010\Projects\CustomCollection\CustomCollection\bin\Debug\CustomCollection.pdb
+c:\users\abajpai\documents\visual studio 2010\Projects\CustomCollection\CustomCollection\obj\x86\Debug\CustomCollection.exe
+c:\users\abajpai\documents\visual studio 2010\Projects\CustomCollection\CustomCollection\obj\x86\Debug\CustomCollection.pdb
