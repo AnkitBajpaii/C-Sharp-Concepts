@@ -2,7 +2,7 @@
 ## You are at right place !!! :thumbsup:
 
 This repository contains the implementation of some well known **C-Sharp** concepts.  
-You can refer these while bushing up your concepts in C#.  
+You can refer these while brushing up your concepts in C#.  
 
 **Below are the topics covered in this repo:**  
 - Arrays  
