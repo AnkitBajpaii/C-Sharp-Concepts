@@ -20,7 +20,7 @@ You can refer these while brushing up your concepts in C#.
 - Indexer  
 - Interface  
 - Jagged Arrays    
-- Lambra Exp    
+- Lambda Expression   
 - Linq    
 - Logging and Tracing
 - Reflection
