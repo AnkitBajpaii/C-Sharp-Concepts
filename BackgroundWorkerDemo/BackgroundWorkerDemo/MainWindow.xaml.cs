@@ -13,17 +13,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace BackgroundWorkerDemo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        bool _shouldUserReportProgress = false;
+        string _loadingStatus = string.Empty;
+
+        public bool ShouldUserReportProgress
+        {
+            get
+            {
+                return _shouldUserReportProgress;
+            }
+
+            set
+            {
+                _shouldUserReportProgress = value;
+            }
+        }
+        public string LoadingStatus
+        {
+            get
+            {
+                return _loadingStatus;
+            }
+
+            set
+            {
+                _loadingStatus = value;
+                RaisePropertyChanged("LoadingStatus");
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void btnDoSynchronousCalculation_Click(object sender, RoutedEventArgs e)
@@ -31,7 +62,7 @@ namespace BackgroundWorkerDemo
             int max = 10000;
             pbCalculationProgress.Value = 0;
             lbResults.Items.Clear();
-            txtBlckLoadingStatus.Text = "Loading...";
+            LoadingStatus = "Loading...";
 
             int counter = 0;
             for (int i = 0; i < max; i++)
@@ -47,7 +78,7 @@ namespace BackgroundWorkerDemo
                 pbCalculationProgress.Value = Convert.ToInt32(((double)i / max) * 100);
             }
 
-            txtBlckLoadingStatus.Text = "Completed";
+            LoadingStatus = "Completed";
             MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + counter);
         }
 
@@ -55,27 +86,26 @@ namespace BackgroundWorkerDemo
         {
             pbCalculationProgress.Value = 0;
             lbResults.Items.Clear();
-            txtBlckLoadingStatus.Text = "Loading...";
 
             BackgroundWorker _worker = new BackgroundWorker();
-            _worker.WorkerReportsProgress = true;
             _worker.DoWork += _worker_DoWork;
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
-            _worker.ProgressChanged += _worker_ProgressChanged;
+
+            if (ShouldUserReportProgress)
+            {
+                _worker.WorkerReportsProgress = true;
+                _worker.ProgressChanged += _worker_ProgressChanged;
+                LoadingStatus = "Loading via ReportProgress";
+            }
+            else
+                LoadingStatus = "Loading via Dispatcher";
+
             _worker.RunWorkerAsync(10000);
-        }
-
-        private void _worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            pbCalculationProgress.Value = e.ProgressPercentage;
-
-            if (e.UserState != null)
-                lbResults.Items.Add(e.UserState);
         }
 
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            txtBlckLoadingStatus.Text = "Completed";
+            LoadingStatus = "Completed";
             MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + e.Result);
         }
 
@@ -90,15 +120,46 @@ namespace BackgroundWorkerDemo
                 if (i % 42 == 0)
                 {
                     counter++;
-                    (sender as BackgroundWorker).ReportProgress(progressPercentage, i);
+                    if (ShouldUserReportProgress)
+                        (sender as BackgroundWorker).ReportProgress(progressPercentage, i);
+                    else
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => { pbCalculationProgress.Value = progressPercentage; lbResults.Items.Add(i); }), DispatcherPriority.Background, null);
+
                 }
                 else
-                    (sender as BackgroundWorker).ReportProgress(progressPercentage);
+                {
+                    if (ShouldUserReportProgress)
+                        (sender as BackgroundWorker).ReportProgress(progressPercentage);
+                    else
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => { pbCalculationProgress.Value = progressPercentage; }), DispatcherPriority.Background, null);
+                }
 
                 System.Threading.Thread.Sleep(1);
             }
 
             e.Result = counter;
         }
+
+        private void _worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pbCalculationProgress.Value = e.ProgressPercentage;
+
+            if (e.UserState != null)
+                lbResults.Items.Add(e.UserState);
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        #endregion
+
     }
 }
