@@ -1,18 +1,20 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundWorkerDemo", "BackgroundWorkerDemo\BackgroundWorkerDemo.csproj", "{17F28A8F-82B4-45B5-A811-C1FD68341601}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundWorkerDemo", "BackgroundWorkerDemo\BackgroundWorkerDemo.csproj", "{3770BE99-59C6-459E-829B-8DCBC932C3E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x86 = Debug|x86
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{17F28A8F-82B4-45B5-A811-C1FD68341601}.Debug|x86.ActiveCfg = Debug|x86
-		{17F28A8F-82B4-45B5-A811-C1FD68341601}.Debug|x86.Build.0 = Debug|x86
-		{17F28A8F-82B4-45B5-A811-C1FD68341601}.Release|x86.ActiveCfg = Release|x86
-		{17F28A8F-82B4-45B5-A811-C1FD68341601}.Release|x86.Build.0 = Release|x86
+		{3770BE99-59C6-459E-829B-8DCBC932C3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3770BE99-59C6-459E-829B-8DCBC932C3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3770BE99-59C6-459E-829B-8DCBC932C3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3770BE99-59C6-459E-829B-8DCBC932C3E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
