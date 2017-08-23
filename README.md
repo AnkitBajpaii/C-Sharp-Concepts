@@ -7,7 +7,8 @@ You can refer these while brushing up your concepts in C#.
 - Arrays  
 - Built in Attributes    
 - Custom Attributes  
-- BackgroundWorker  
+- BackgroundWorker
+- Dispatcher  
 - Collections  
 - Custom Collections  
 - Covariance And Contravariance  
@@ -30,6 +31,7 @@ You can refer these while brushing up your concepts in C#.
 - Reflection  
 - Singleton  
 - Serialization  
+- Multithreading
 
 **Tools:** Visual studio  
 **Language:** C#
