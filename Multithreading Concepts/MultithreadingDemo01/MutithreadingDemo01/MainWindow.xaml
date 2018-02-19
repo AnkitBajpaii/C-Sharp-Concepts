@@ -1,0 +1,20 @@
+﻿<Window x:Class="MutithreadingDemo01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MutithreadingDemo01"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel>
+            <Button Content="Do time consuming work" Width="50" x:Name="btnDoTimeConsumingWork" Click="btnDoTimeConsumingWork_Click"/>
+
+            <Button Margin="10" Content="Print Numbers" Width="50" x:Name="btnPrintNum" Click="btnPrintNum_Click"/>
+
+            <ListBox x:Name="listBox" Width="70" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
+
+            <TextBlock x:Name="tbMessage" Text="{Binding SampleObj.Message}" Margin="10" Width="400"/>
+        </StackPanel>
+    </Grid>
+</Window>
