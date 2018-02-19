@@ -48,6 +48,7 @@ namespace DeadLockSituation
                 Console.WriteLine(Thread.CurrentThread.Name + " acquired lock on " + _fromAccount._id);
                 Console.WriteLine(Thread.CurrentThread.Name + " suspended for 1 second");
                 Thread.Sleep(1000);
+                Console.WriteLine(Thread.CurrentThread.Name + " is back in action and trying to acquire lock on " + _toAccount._id);
                 lock (_toAccount)
                 {
                     Console.WriteLine("This section of code will never be executed");
