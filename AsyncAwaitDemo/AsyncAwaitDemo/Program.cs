@@ -9,28 +9,6 @@ namespace AsyncAwaitDemo
 {
     class Program
     {
-        public static async void AsynchronousOperation2()
-        {
-            Console.WriteLine("Inside AsynchronousOperation2 Before AsyncMethod2, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-            int count = await AsyncMethod2();
-            Console.WriteLine("Inside AsynchronousOperation2 After AsyncMethod2, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-        }
-
-        public static async Task<int> AsyncMethod2()
-        {
-            int count = 0;
-            Console.WriteLine("Inside AsyncMethod2, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-            await Task.Run(() =>
-            {
-                Console.WriteLine("Executing a long running task which takes 10 seconds to complete, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-                Thread.Sleep(5000);
-                count = 10;
-            });
-
-            Console.WriteLine("Inside AsyncMethod2 task completed, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-            return count;
-        }
-
         public static async void AsynchronousOperation()
         {
             Console.WriteLine("Inside AsynchronousOperation Before AsyncMethod, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
@@ -84,27 +62,10 @@ namespace AsyncAwaitDemo
 
             AsynchronousOperation();
 
-            //AsynchronousOperation2();
-
             Console.WriteLine("Completed Main method, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
 
             Console.ReadKey();
         }
-
-        public static void SynchronousOperation()
-        {
-            SynchronousMethod();
-
-            Method2();
-        }
-
-        public static void SynchronousMethod()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Thread.Sleep(500);
-                Console.WriteLine("Synchronous Method");
-            }
-        }
+        
     }
 }
