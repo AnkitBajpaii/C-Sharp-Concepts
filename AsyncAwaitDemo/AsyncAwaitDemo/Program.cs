@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,7 +34,7 @@ namespace AsyncAwaitDemo
             await Task.Run(() =>
             {
                 Console.WriteLine("Executing a long running task which takes 10 seconds to complete, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-                Thread.Sleep(5000);
+                Thread.Sleep(10000);
                 count = 10;
             });
 
@@ -66,6 +63,6 @@ namespace AsyncAwaitDemo
 
             Console.ReadKey();
         }
-        
+
     }
 }
