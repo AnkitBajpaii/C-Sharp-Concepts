@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LinkedListDemo
 {
@@ -79,7 +77,7 @@ namespace LinkedListDemo
             //if list is empty
             if (lastNode == null)
             {
-                
+
                 this.head = newNode;
             }
             else
@@ -93,13 +91,13 @@ namespace LinkedListDemo
             Node newNode = new Node(t);
             Node prevNode = GetNodeAtIndex(index);
 
-            if(this.head ==  null)
+            if (this.head == null)
             {
                 this.head = newNode;
                 return;
             }
-            
-            if(prevNode == null)
+
+            if (prevNode == null)
             {
                 throw new IndexOutOfRangeException("You are trying to insert at an index which does not exists.");
             }
@@ -110,7 +108,7 @@ namespace LinkedListDemo
 
         public bool Exists(T key)
         {
-            if(this.head == null)
+            if (this.head == null)
             {
                 return false;
             }
@@ -122,50 +120,14 @@ namespace LinkedListDemo
 
         public bool DeleteNodeWithKey(T key)
         {
-            if(this.head == null)
+            if (this.head == null)
             {
                 return false;
             }
-            
+
             Node node = SearchNode(key);
 
-            if(node == null)
-            {
-                return false;
-            }
-
-            if(node == this.head)
-            {
-                Node next = this.head.Next;
-                this.head.Next = null;
-                this.head = next;
-            }
-
-            else
-            {
-                Node ptr = this.head;
-                while (ptr != null && ptr.Next != node)
-                {
-                    ptr = ptr.Next;
-                }
-
-                ptr.Next = node.Next;
-            }
-
-            node.Next = null;
-            return true;
-        }
-
-        public bool DeleteNodeAt(int position)
-        {
-            if(this.head == null)
-            {
-                return false;
-            }
-
-            Node node = GetNodeAtIndex(position);
-
-            if(node == null)
+            if (node == null)
             {
                 return false;
             }
@@ -192,9 +154,71 @@ namespace LinkedListDemo
             return true;
         }
 
+        public bool DeleteNodeAt(int position)
+        {
+            if (this.head == null)
+            {
+                return false;
+            }
+
+            Node node = GetNodeAtIndex(position);
+
+            if (node == null)
+            {
+                return false;
+            }
+
+            if (node == this.head)
+            {
+                Node next = this.head.Next;
+                this.head.Next = null;
+                this.head = next;
+            }
+
+            else
+            {
+                Node ptr = this.head;
+                while (ptr != null && ptr.Next != node)
+                {
+                    ptr = ptr.Next;
+                }
+
+                ptr.Next = node.Next;
+            }
+
+            node.Next = null;
+            return true;
+        }
+
+        public void Print()
+        {
+            Node ptr = this.head;
+            while (ptr != null)
+            {
+                Console.Write(ptr.Data + " " );
+                ptr = ptr.Next;
+            }
+            Console.WriteLine();
+        }
+        
+        public void Reverse()
+        {
+            Node current = this.head, prev = null, next;
+
+            while(current != null)
+            {
+                next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+
+            this.head = prev;
+        }
+
         #endregion
     }
-
+    
     class Program
     {
         static void Main(string[] args)
@@ -202,16 +226,21 @@ namespace LinkedListDemo
             LinkedList<int> list = new LinkedList<int>();
             list.AddToFront(5);
             list.AddToFront(7);
-            list.AddToFront(9);
-            list.AddToFront(11);
+            list.AddToEnd(11);
             list.AddToEnd(2);
 
+            list.Print();
+
             list.DeleteNodeWithKey(5);
-            list.DeleteNodeWithKey(11);
-
             list.DeleteNodeAt(1);
+            list.Print();
 
-            list.DeleteNodeWithKey(7);
+            list.AddToFront(5);
+            list.AddToFront(7);
+            list.Print();
+
+            list.Reverse();
+            list.Print();
 
             Console.ReadKey();
         }
