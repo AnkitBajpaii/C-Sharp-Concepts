@@ -190,7 +190,7 @@ namespace LinkedListDemo
             return true;
         }
 
-        public void Print()
+        public void PrintIterative()
         {
             Node ptr = this.head;
             while (ptr != null)
@@ -200,7 +200,37 @@ namespace LinkedListDemo
             }
             Console.WriteLine();
         }
-        
+
+        public void PrintRecursive()
+        {
+            Console.WriteLine();
+            PrintRecursive(this.head);
+        }
+
+        private void PrintRecursive(Node ptr)
+        {
+            if (ptr == null)
+                return;
+
+            Console.Write(ptr.Data+ " ");
+            PrintRecursive(ptr.Next);
+        }
+
+        public void ReversePrintRecursive()
+        {
+            Console.WriteLine();
+            ReversePrintRecursive(this.head);
+        }
+
+        private void ReversePrintRecursive(Node ptr)
+        {
+            if (ptr == null)
+                return;
+
+            ReversePrintRecursive(ptr.Next);
+            Console.Write(ptr.Data + " ");
+        }
+
         public void Reverse()
         {
             Node current = this.head, prev = null, next;
@@ -216,6 +246,25 @@ namespace LinkedListDemo
             this.head = prev;
         }
 
+        public void ReverseRecursive()
+        {
+            ReverseRecursive(head);
+        }
+        private void ReverseRecursive(Node p)
+        {
+            if(p.Next == null)
+            {
+                this.head = p;
+                return;
+            }
+
+            ReverseRecursive(p.Next);
+
+            Node q = p.Next;
+            q.Next = p;
+            p.Next = null;
+        }
+
         #endregion
     }
     
@@ -229,18 +278,15 @@ namespace LinkedListDemo
             list.AddToEnd(11);
             list.AddToEnd(2);
 
-            list.Print();
-
             list.DeleteNodeWithKey(5);
             list.DeleteNodeAt(1);
-            list.Print();
 
-            list.AddToFront(5);
-            list.AddToFront(7);
-            list.Print();
+            list.PrintIterative();
+            list.PrintRecursive();
+            list.ReversePrintRecursive();
 
             list.Reverse();
-            list.Print();
+            list.ReverseRecursive();
 
             Console.ReadKey();
         }
