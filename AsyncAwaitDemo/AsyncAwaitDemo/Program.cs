@@ -9,15 +9,12 @@ namespace AsyncAwaitDemo
         public static async void AsynchronousOperation()
         {
             Console.WriteLine("Inside AsynchronousOperation Before AsyncMethod, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-            Task<int> _task = AsyncMethod();
-
-            Console.WriteLine("Inside AsynchronousOperation After AsyncMethod, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-
-            Method2();
+            //Task<int> _task = AsyncMethod();
+            int count = await AsyncMethod();
 
             Console.WriteLine("Inside AsynchronousOperation After AsyncMethod Before Await, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
 
-            int count = await _task;
+            //int count = await _task;
 
             Console.WriteLine("Inside AsynchronousOperation After AsyncMethod After Await Before DependentMethod, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
 
@@ -34,19 +31,14 @@ namespace AsyncAwaitDemo
             await Task.Run(() =>
             {
                 Console.WriteLine("Executing a long running task which takes 10 seconds to complete, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-                Thread.Sleep(10000);
+                Thread.Sleep(20000);
                 count = 10;
             });
 
             Console.WriteLine("Completed AsyncMethod, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
 
             return count;
-        }
-
-        public static void Method2()
-        {
-            Console.WriteLine("Inside Method2, Thread Id: " + Thread.CurrentThread.ManagedThreadId);
-        }
+        }       
 
         public static void DependentMethod(int count)
         {
